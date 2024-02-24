@@ -1,0 +1,77 @@
+[gd_scene load_steps=4 format=3 uid="uid://rl2pkvl2bl8"]
+
+[ext_resource type="Script" path="res://scripts/spaceship.gd" id="1_ci7o0"]
+[ext_resource type="Texture2D" uid="uid://ujlvqas5k62c" path="res://assets/icon.png" id="1_ht0x0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m7l4g"]
+
+[node name="spaceship" type="Sprite2D"]
+texture = ExtResource("1_ht0x0")
+script = ExtResource("1_ci7o0")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -13)
+
+[node name="spaceship_area" type="Area2D" parent="." groups=["spaceship"]]
+scale = Vector2(0.993314, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="spaceship_area"]
+shape = SubResource("RectangleShape2D_m7l4g")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 331.0
+offset_bottom = 51.0
+
+[node name="health_bar" type="ProgressBar" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -13.5
+offset_bottom = 13.5
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+show_percentage = false
+
+[node name="lose_control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -174.0
+offset_top = -40.0
+offset_right = 175.0
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/lose_control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 44.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "You Lose"
+horizontal_alignment = 1
+
+[node name="play_again_button" type="Button" parent="CanvasLayer/lose_control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -45.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "play again"
+
+[connection signal="pressed" from="CanvasLayer/lose_control/play_again_button" to="." method="_on_play_again_button_pressed"]

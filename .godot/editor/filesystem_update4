@@ -1,0 +1,13 @@
+res://scenes/level_1.tscn
+res://scripts/spaceship.gd
+res://scenes/spaceship.tscn
+res://scenes/bullet.tscn
+res://scripts/bullet.gd
+res://scenes/enemy.tscn
+res://scenes/enemy_1_follow.tscn
+res://scripts/enemy.gd
+res://scenes/level_1.gd
+res://scenes/enemy.gd
+res://scenes/enemy_bullet.tscn
+res://scripts/enemy_bullet.gd
+res://scripts/Path2D.gd

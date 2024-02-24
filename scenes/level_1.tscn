@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://brp5aparjger1"]
+
+[ext_resource type="PackedScene" uid="uid://rl2pkvl2bl8" path="res://scenes/spaceship.tscn" id="1_flir1"]
+[ext_resource type="Script" path="res://scenes/level_1.gd" id="1_ibgth"]
+[ext_resource type="Script" path="res://scripts/Path2D.gd" id="3_jr6rn"]
+
+[sub_resource type="Curve2D" id="Curve2D_s753x"]
+_data = {
+"points": PackedVector2Array(-124.726, -5.93933, 124.726, 5.93933, 242, 151, -217.379, -61.769, 217.379, 61.769, 739, 179, 0, 0, 0, 0, 1107, 216, 1077.47, 105.392, -1077.47, -105.392, 679, -140, -52.6962, -79.6049, 52.6962, 79.6049, -100, 153, 0, 0, 0, 0, 242, 151)
+}
+point_count = 6
+
+[node name="level_1" type="Node2D"]
+script = ExtResource("1_ibgth")
+
+[node name="bg" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 651.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="spaceship" parent="." node_paths=PackedStringArray("bullets_node") instance=ExtResource("1_flir1")]
+bullets_node = NodePath("../bullets")
+
+[node name="bullets" type="Node2D" parent="."]
+
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="Path2D" type="Path2D" parent="." node_paths=PackedStringArray("bullets_node")]
+position = Vector2(-10, 43)
+curve = SubResource("Curve2D_s753x")
+script = ExtResource("3_jr6rn")
+bullets_node = NodePath("../bullets")
+
+[node name="check_if_wave_done_timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="check_if_wave_done_timer" to="." method="_on_check_if_wave_done_timer_timeout"]
